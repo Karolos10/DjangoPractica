@@ -1,16 +1,23 @@
 from django.http import HttpResponse
 import datetime
+from django.template import Template, Context
 
 
 def saludo(request):
 
-    documento="""<html>
-    <body>
-    <h1>Hola, mundo</h1>
-    </body>
-    </html>"""
+    nombres="Carlos"
 
-    return HttpResponse(documento)
+    doc_externo=open("C:/Users/CARLO/Desktop/proyectosDjango/Proyecto1/index.html")
+
+    plt = Template(doc_externo.read())
+
+    doc_externo.close()
+
+    ctx = Context({"nombre_persona": nombres})
+
+    document = plt.render(ctx)
+
+    return HttpResponse(document)
 
 def despedida(request):
     return HttpResponse("Hasta luego, mundo")
